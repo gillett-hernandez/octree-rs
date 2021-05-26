@@ -1,5 +1,5 @@
 use math::*;
-use packed_simd::f32x4;
+use packed_simd::{f32x4, shuffle};
 
 use std::ops::Mul;
 
@@ -148,6 +148,19 @@ impl AABB {
     pub fn volume(&self) -> f32 {
         let [sx, sy, sz, _]: [f32; 4] = self.size().0.into();
         sx * sy * sz
+    }
+
+    pub fn get_points(&self) -> [Point3; 8] {
+        [
+            self.min,
+            Point3::from_raw(shuffle!(self.min.0, self.max.0, [4, 1, 2, 3])),
+            Point3::from_raw(shuffle!(self.min.0, self.max.0, [0, 5, 2, 3])),
+            Point3::from_raw(shuffle!(self.min.0, self.max.0, [0, 1, 6, 3])),
+            Point3::from_raw(shuffle!(self.min.0, self.max.0, [4, 1, 6, 7])),
+            Point3::from_raw(shuffle!(self.min.0, self.max.0, [4, 5, 2, 7])),
+            Point3::from_raw(shuffle!(self.min.0, self.max.0, [0, 5, 6, 7])),
+            self.max,
+        ]
     }
 
     // pub fn relative_eq(&self, other: &AABB, epsilon: f32) -> bool {

@@ -16,14 +16,13 @@ image = "0.23.12"
 packed_simd = { version = "0.3.4", package = "packed_simd_2" }
 nalgebra = "0.26.2"
 ordered-float = "2.0.1"
-exr = "0.9.0"
 pbr = "1.0.4"
 parking_lot = "0.11.1"
 crossbeam = "0.8.0"
-tobj = "2.0.3"
 minifb = "0.19.1"
 math =  { git = "https://github.com/gillett-hernandez/rust_cg_math" }
 win32_notification = "0.1.0"
+array-init = "2.0.0"
 
 [build-dependencies]
 serde = { version = "1.0.120", features = ["derive"] }
